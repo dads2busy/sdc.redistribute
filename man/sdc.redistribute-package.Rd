@@ -11,6 +11,7 @@ Estimate attribute values for one set of polygons from values measured on a diff
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://dads2busy.github.io/sdc.redistribute}
   \item \url{https://github.com/dads2busy/sdc.redistribute}
   \item Report bugs at \url{https://github.com/dads2busy/sdc.redistribute/issues}
 }
