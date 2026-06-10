@@ -5,3 +5,6 @@
 ^_pkgdown\.yml$
 ^cran-comments\.md$
 ^docs$
+^README\.Rmd$
+^doc$
+^Meta$

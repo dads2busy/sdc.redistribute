@@ -1,0 +1,38 @@
+---
+title: "Introduction to sdc.redistribute"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to sdc.redistribute}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sdc.redistribute)
+```
+
+`sdc.redistribute` moves measured values from a *source* set of polygons onto a
+*target* set that does not share the same boundaries.
+
+```{r}
+library(sdc.redistribute)
+data(sdc_example)
+
+# Area-weighted: split tract population onto neighborhoods.
+redistribute_direct(sdc_example$source, sdc_example$target, extensive = "pop")
+
+# Dasymetric: weight the split by parcels (here, by unit count).
+redistribute_parcels(
+  sdc_example$source, sdc_example$target, sdc_example$parcels,
+  extensive = "pop", weights = "units")
+```
+
+Use `extensive` for counts (totals are preserved) and `intensive` for rates
+(area-weighted means).

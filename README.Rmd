@@ -1,0 +1,39 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# sdc.redistribute
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/dads2busy/sdc.redistribute/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dads2busy/sdc.redistribute/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+Redistribute attribute values from one set of polygons onto another, by
+area weighting (`redistribute_direct`) or by a dasymetric point layer such as
+parcel centroids (`redistribute_parcels`).
+
+## Installation
+
+```r
+# install.packages("pak")
+pak::pak("dads2busy/sdc.redistribute")
+```
+
+## Example
+
+```{r example}
+library(sdc.redistribute)
+data(sdc_example)
+redistribute_direct(sdc_example$source, sdc_example$target, extensive = "pop")
+```
