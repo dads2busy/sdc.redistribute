@@ -8,3 +8,9 @@ box_sf <- function(xmin, ymin, xmax, ymax, crs = 3857, ...) {
     sf::st_sf(..., geometry = sf::st_sfc(poly, crs = crs))
   }
 }
+
+pts_sf <- function(coords, crs = 3857, ...) {
+  g <- sf::st_sfc(lapply(seq_len(nrow(coords)),
+                         function(i) sf::st_point(coords[i, ])), crs = crs)
+  sf::st_sf(..., geometry = g)
+}
