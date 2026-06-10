@@ -1,10 +1,3 @@
-box_sf <- function(xmin, ymin, xmax, ymax, crs = 3857, ...) {
-  poly <- sf::st_polygon(list(rbind(
-    c(xmin, ymin), c(xmax, ymin), c(xmax, ymax), c(xmin, ymax), c(xmin, ymin)
-  )))
-  sf::st_sf(..., geometry = sf::st_sfc(poly, crs = crs))
-}
-
 test_that("extensive count splits by area share and preserves the total", {
   src <- box_sf(0, 0, 2, 2, pop = 100)
   tgt <- rbind(box_sf(0, 0, 1, 2, id = "A"), box_sf(1, 0, 2, 2, id = "B"))

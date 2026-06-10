@@ -12,11 +12,28 @@
 #' @param suffix Optional string appended to each new column name.
 #' @return The `target` layer (an `sf` object) with one new column per
 #'   redistributed measure.
+#' @details
+#' Extensive measures (counts) are redistributed by each intersection's share of
+#' the source polygon area and, when `preserve_totals = TRUE`, rescaled so the
+#' target totals match the source totals. Intensive measures (rates/densities)
+#' are area-weighted means: the sum of each source value times the intersection's
+#' share of the target polygon area (the standard areal-weighting intensive
+#' estimator). This equals a true area-weighted mean when the target is fully
+#' covered by the source and treats any uncovered part of a target as
+#' contributing zero. `NA` source values are omitted from the weighted sums.
 #' @export
 redistribute_direct <- function(source, target, extensive = NULL,
                                 intensive = NULL, preserve_totals = TRUE,
                                 suffix = NULL) {
+  if (is.null(extensive) && is.null(intensive)) {
+    stop("Supply at least one of `extensive` or `intensive`.", call. = FALSE)
+  }
   .validate_layers(source, target, c(extensive, intensive))
+  reserved <- c(".src_area", ".int_area", ".tgt_id", ".tgt_area")
+  if (any(reserved %in% names(source)) || any(reserved %in% names(target))) {
+    stop("`source`/`target` must not contain reserved column names: ",
+         paste(reserved, collapse = ", "), call. = FALSE)
+  }
   .require_projected(source, "source")
   target <- .align_crs(target, source)
 

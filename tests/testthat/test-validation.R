@@ -1,14 +1,3 @@
-box_sf <- function(xmin, ymin, xmax, ymax, crs = 3857, ...) {
-  poly <- sf::st_polygon(list(rbind(
-    c(xmin, ymin), c(xmax, ymin), c(xmax, ymax), c(xmin, ymax), c(xmin, ymin)
-  )))
-  if (is.na(crs)) {
-    sf::st_sf(..., geometry = sf::st_sfc(poly))
-  } else {
-    sf::st_sf(..., geometry = sf::st_sfc(poly, crs = crs))
-  }
-}
-
 test_that(".validate_layers rejects non-sf and missing columns", {
   src <- box_sf(0, 0, 2, 2, pop = 100)
   tgt <- box_sf(0, 0, 1, 2)
