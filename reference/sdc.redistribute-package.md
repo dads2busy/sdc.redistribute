@@ -10,7 +10,7 @@ total-preserving; rate (intensive) measures use area-weighted means.
 
 Useful links:
 
-- <https://dads2busy.github.io/sdc.redistribute>
+- <https://dads2busy.github.io/sdc.redistribute/>
 
 - <https://github.com/dads2busy/sdc.redistribute>
 
