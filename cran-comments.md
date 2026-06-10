@@ -4,6 +4,10 @@
 
 * This is a new submission, so R CMD check reports the standard
   "New submission" NOTE.
+* The incoming-feasibility check flags "dasymetric" in the Description as
+  possibly misspelled. It is spelled correctly: dasymetric mapping is a
+  standard term in spatial analysis for distributing values using ancillary
+  data.
 
 (The local check additionally reports a "checking for future file timestamps ...
 unable to verify current time" NOTE, which is an environmental artifact of the

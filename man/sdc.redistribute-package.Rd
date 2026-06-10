@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Aaron Schroeder \email{ads7fg@virginia.edu} (\href{https://orcid.org/0000-0001-9985-1136}{ORCID})
+\strong{Maintainer}: Aaron Schroeder \email{ads7fg@virginia.edu} (\href{https://orcid.org/0000-0003-4372-2241}{ORCID})
 
 }
 \keyword{internal}
