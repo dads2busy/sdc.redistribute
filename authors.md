@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/dads2busy/sdc.redistribute/blob/main/DESCRIPTION)
 
 Schroeder A (2026). *sdc.redistribute: Redistribute Values Between
-Geographic Areas*. R package version 0.0.0.9000,
+Geographic Areas*. R package version 0.1.0,
 <https://dads2busy.github.io/sdc.redistribute/>.
 
     @Manual{,
       title = {sdc.redistribute: Redistribute Values Between Geographic Areas},
       author = {Aaron Schroeder},
       year = {2026},
-      note = {R package version 0.0.0.9000},
+      note = {R package version 0.1.0},
       url = {https://dads2busy.github.io/sdc.redistribute/},
     }
