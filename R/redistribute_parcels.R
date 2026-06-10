@@ -13,6 +13,12 @@
 #' @param weights Optional name of a numeric column in `points` to weight by.
 #' @param suffix Optional string appended to each new column name.
 #' @return The `target` layer (an `sf` object) with one new column per measure.
+#' @details
+#' Each source value is split across the points inside that source polygon in
+#' proportion to `weights` (equally when `weights = NULL`), then summed within
+#' each target polygon. A source polygon that contains no points contributes
+#' nothing to any target (its value cannot be placed). If the total weight of a
+#' source's points is zero, that source likewise contributes nothing.
 #' @export
 redistribute_parcels <- function(source, target, points, extensive = NULL,
                                  weights = NULL, suffix = NULL) {
@@ -43,7 +49,9 @@ redistribute_parcels <- function(source, target, points, extensive = NULL,
 
   out <- target
   for (col in extensive) {
-    piece <- d[[col]] * (d[[".w"]] / d[[".wsum"]])
+    share <- d[[".w"]] / d[[".wsum"]]
+    share[!is.finite(share)] <- 0
+    piece <- d[[col]] * share
     agg <- tapply(piece, d[[".tgt_id"]], sum, na.rm = TRUE)
     vals <- rep(0, nrow(target))
     vals[as.integer(names(agg))] <- as.numeric(agg)
