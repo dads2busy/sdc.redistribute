@@ -5,17 +5,16 @@
 .validate_layers <- function(source, target, cols = character()) {
   if (!.is_sf(source)) stop("`source` must be an sf object.", call. = FALSE)
   if (!.is_sf(target)) stop("`target` must be an sf object.", call. = FALSE)
-  missing <- setdiff(cols, names(source))
-  if (length(missing) > 0) {
+  absent_cols <- setdiff(cols, names(source))
+  if (length(absent_cols) > 0) {
     stop(sprintf("Column(s) not found in `source`: %s",
-                 paste(missing, collapse = ", ")), call. = FALSE)
+                 paste(absent_cols, collapse = ", ")), call. = FALSE)
   }
   invisible(TRUE)
 }
 
 .require_projected <- function(x, name) {
-  crs <- sf::st_crs(x)
-  if (is.na(crs)) {
+  if (is.na(sf::st_crs(x)$wkt)) {
     stop(sprintf("`%s` has no CRS; set one with sf::st_crs() before redistributing.", name),
          call. = FALSE)
   }

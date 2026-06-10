@@ -33,3 +33,13 @@ test_that(".align_crs transforms to the reference CRS", {
   aligned <- .align_crs(other, ref)
   expect_equal(sf::st_crs(aligned), sf::st_crs(ref))
 })
+
+test_that(".suffixed appends only when a suffix is given", {
+  expect_equal(.suffixed("pop", NULL), "pop")
+  expect_equal(.suffixed("pop", "_direct"), "pop_direct")
+})
+
+test_that(".align_crs leaves a same-CRS object unchanged", {
+  ref <- box_sf(0, 0, 1, 1, crs = 3857)
+  expect_identical(sf::st_crs(.align_crs(ref, ref)), sf::st_crs(ref))
+})
