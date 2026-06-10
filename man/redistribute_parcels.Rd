@@ -42,6 +42,8 @@ proportion to \code{weights} (equally when \code{weights = NULL}), then summed w
 each target polygon. A source polygon that contains no points contributes
 nothing to any target (its value cannot be placed). If the total weight of a
 source's points is zero, that source likewise contributes nothing.
+If \code{target} already has a column named like a redistributed measure, it is
+overwritten; pass \code{suffix} to keep both.
 }
 \examples{
 src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(

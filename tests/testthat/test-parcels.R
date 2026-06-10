@@ -35,3 +35,17 @@ test_that("a source whose points all have zero weight contributes nothing (no Na
   expect_false(any(is.nan(out$pop)))
   expect_equal(out$pop, c(0, 0))
 })
+
+test_that("redistribute_parcels requires at least one extensive column", {
+  src <- box_sf(0, 0, 2, 2, pop = 100)
+  tgt <- box_sf(0, 0, 1, 2)
+  pts <- pts_sf(rbind(c(0.5, 1.0)))
+  expect_error(redistribute_parcels(src, tgt, pts), "at least one")
+})
+
+test_that("redistribute_parcels errors on a source with no CRS", {
+  src <- box_sf(0, 0, 2, 2, crs = NA, pop = 100)
+  tgt <- box_sf(0, 0, 1, 2)
+  pts <- pts_sf(rbind(c(0.5, 1.0)))
+  expect_error(redistribute_parcels(src, tgt, pts, extensive = "pop"), "no CRS")
+})

@@ -21,6 +21,9 @@
 #' estimator). This equals a true area-weighted mean when the target is fully
 #' covered by the source and treats any uncovered part of a target as
 #' contributing zero. `NA` source values are omitted from the weighted sums.
+#' Targets that no source polygon covers receive `0` for extensive measures and
+#' `NA` for intensive measures. If `target` already has a column named like a
+#' redistributed measure, it is overwritten; pass `suffix` to keep both.
 #' @examples
 #' src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(
 #'   sf::st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0)))),

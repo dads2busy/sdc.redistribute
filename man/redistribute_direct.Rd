@@ -46,6 +46,9 @@ share of the target polygon area (the standard areal-weighting intensive
 estimator). This equals a true area-weighted mean when the target is fully
 covered by the source and treats any uncovered part of a target as
 contributing zero. \code{NA} source values are omitted from the weighted sums.
+Targets that no source polygon covers receive \code{0} for extensive measures and
+\code{NA} for intensive measures. If \code{target} already has a column named like a
+redistributed measure, it is overwritten; pass \code{suffix} to keep both.
 }
 \examples{
 src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(

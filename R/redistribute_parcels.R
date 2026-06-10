@@ -19,6 +19,8 @@
 #' each target polygon. A source polygon that contains no points contributes
 #' nothing to any target (its value cannot be placed). If the total weight of a
 #' source's points is zero, that source likewise contributes nothing.
+#' If `target` already has a column named like a redistributed measure, it is
+#' overwritten; pass `suffix` to keep both.
 #' @examples
 #' src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(
 #'   sf::st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0)))),
@@ -33,10 +35,23 @@
 #' @export
 redistribute_parcels <- function(source, target, points, extensive = NULL,
                                  weights = NULL, suffix = NULL) {
+  if (is.null(extensive)) {
+    stop("Supply at least one column in `extensive`.", call. = FALSE)
+  }
   .validate_layers(source, target, extensive)
   if (!.is_sf(points)) stop("`points` must be an sf object.", call. = FALSE)
   if (!is.null(weights) && !weights %in% names(points)) {
     stop(sprintf("`weights` column '%s' not found in `points`.", weights),
+         call. = FALSE)
+  }
+  reserved <- c(".src_id", ".tgt_id", ".w", ".wsum")
+  if (any(reserved %in% names(source)) || any(reserved %in% names(target)) ||
+      any(reserved %in% names(points))) {
+    stop("`source`/`target`/`points` must not contain reserved column names: ",
+         paste(reserved, collapse = ", "), call. = FALSE)
+  }
+  if (is.na(sf::st_crs(source)$wkt)) {
+    stop("`source` has no CRS; set one with sf::st_crs() before redistributing.",
          call. = FALSE)
   }
   points <- .align_crs(points, source)
