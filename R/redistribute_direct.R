@@ -21,6 +21,15 @@
 #' estimator). This equals a true area-weighted mean when the target is fully
 #' covered by the source and treats any uncovered part of a target as
 #' contributing zero. `NA` source values are omitted from the weighted sums.
+#' @examples
+#' src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(
+#'   sf::st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0)))),
+#'   crs = 3857))
+#' tgt <- sf::st_sf(id = c("A", "B"), geometry = sf::st_sfc(
+#'   sf::st_polygon(list(rbind(c(0,0), c(1,0), c(1,2), c(0,2), c(0,0)))),
+#'   sf::st_polygon(list(rbind(c(1,0), c(2,0), c(2,2), c(1,2), c(1,0)))),
+#'   crs = 3857))
+#' redistribute_direct(src, tgt, extensive = "pop")
 #' @export
 redistribute_direct <- function(source, target, extensive = NULL,
                                 intensive = NULL, preserve_totals = TRUE,

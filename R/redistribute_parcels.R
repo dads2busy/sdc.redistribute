@@ -19,6 +19,17 @@
 #' each target polygon. A source polygon that contains no points contributes
 #' nothing to any target (its value cannot be placed). If the total weight of a
 #' source's points is zero, that source likewise contributes nothing.
+#' @examples
+#' src <- sf::st_sf(pop = 100, geometry = sf::st_sfc(
+#'   sf::st_polygon(list(rbind(c(0,0), c(2,0), c(2,2), c(0,2), c(0,0)))),
+#'   crs = 3857))
+#' tgt <- sf::st_sf(id = c("A", "B"), geometry = sf::st_sfc(
+#'   sf::st_polygon(list(rbind(c(0,0), c(1,0), c(1,2), c(0,2), c(0,0)))),
+#'   sf::st_polygon(list(rbind(c(1,0), c(2,0), c(2,2), c(1,2), c(1,0)))),
+#'   crs = 3857))
+#' pts <- sf::st_sf(geometry = sf::st_sfc(
+#'   sf::st_point(c(0.5, 1)), sf::st_point(c(1.5, 1)), crs = 3857))
+#' redistribute_parcels(src, tgt, pts, extensive = "pop")
 #' @export
 redistribute_parcels <- function(source, target, points, extensive = NULL,
                                  weights = NULL, suffix = NULL) {
