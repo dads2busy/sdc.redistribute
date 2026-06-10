@@ -1,6 +1,6 @@
 Package: sdc.redistribute
 Title: Redistribute Values Between Geographic Areas
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R:
     person("Aaron", "Schroeder", email = "ads7fg@virginia.edu",
            role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9985-1136"))
